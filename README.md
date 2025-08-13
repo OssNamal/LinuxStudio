@@ -146,12 +146,8 @@ git push origin feature/my-feature
 
 4. Open a pull request
 
----
 
-## Contact / Support
 
-* **Issues**: [GitHub Issues](https://github.com/your-org/LinuxStudio/issues)
-* **Email**: [support@yourdomain.com](mailto:support@yourdomain.com)
 
 ---
 
