@@ -1,180 +1,136 @@
 
 
-# LinuxStudio – The Linux Management Platform
+# LinuxStudio , The Linux Management Platform
 
-Unifies **Cockpit** (system management) and **Portainer** (container management) into a single, modern, mobile-friendly dashboard. Replace complex terminal commands with real-time, visual controls for Linux systems and Docker containers.
+##  Project Overview
 
-[![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](#)
-[![Version](https://img.shields.io/badge/version-0.1.0-blue)](#)
-[![Node](https://img.shields.io/badge/node-%3E%3D20.0.0-green)](#installation)
+LinuxStudio is a **web-based Linux management platform** designed to unify **Cockpit** and **Portainer** into one seamless experience. Managing Linux servers typically means juggling multiple tools, memorizing terminal commands, and SSHing into systems just to monitor basic metrics.
 
----
+LinuxStudio eliminates this complexity by providing a **matrix-style green terminal aesthetic dashboard**, where systemd services, Docker containers, logs, and metrics can all be managed visually while still showing the equivalent commands behind the scenes.
 
-## Table of Contents
-
-1. [Overview](#linuxstudio--the-linux-management-platform)
-2. [Installation](#installation)
-3. [Quick Start / Usage](#quick-start--usage)
-4. [API & Detailed Usage](#api--detailed-usage)
-5. [Configuration](#configuration)
-6. [Contributing](#contributing)
-7. [Contact / Support](#contact--support)
-8. [FAQ](#faq)
-9. [Troubleshooting](#troubleshooting)
+This makes LinuxStudio not just a management tool, but also a **learning bridge for Linux users**, empowering them with transparency and confidence.
 
 ---
 
-## Installation
+##  Key Features
 
-### Prerequisites
-
-* Node.js >= 20
-* npm >= 9
-* Docker (for containerized deployment)
-* Modern Linux distribution with `systemd`
-
-### Clone the Repository
-
-```bash
-git clone https://github.com/your-org/LinuxStudio.git
-cd LinuxStudio
-```
-
-### Environment Setup
-
-```bash
-cp .env.example .env
-```
-
-### Local Development (Separate)
-
-```bash
-# Backend
-cd backend
-npm install
-npm run dev
-
-# Frontend (in another terminal)
-cd frontend
-npm install
-npm run dev
-```
-
-### Docker Deployment
-
-```bash
-docker compose up -d --build
-```
+* **Unified Dashboard** – Single platform for Linux and Docker management.
+* **Command Preview Mode** – Displays equivalent Linux commands before execution.
+* **Real-Time Updates** – WebSocket-powered live monitoring of metrics, services, and containers.
+* **Mobile-First** – Responsive design for desktops, tablets, and phones.
+* **Matrix Green Aesthetic** – Neon-green terminal-inspired UI with glowing highlights.
+* **Secure by Design** – JWT authentication, session management, and best-practice coding standards.
+* **Cross-Platform Support** – Works on Ubuntu, Debian, CentOS/RHEL, Fedora, and openSUSE.
 
 ---
 
-## Quick Start / Usage
+##  Tech Stack
 
-Once running:
+### **Frontend**
 
-* **Frontend UI**: `http://localhost:3000` (Dashboard)
-* **Backend API**: `http://localhost:4000`
+* **Next.js 14** (React + TypeScript, server-side rendering)
+* **Tailwind CSS + shadcn/ui** for sleek, accessible components
+* **Zustand** for state management
+* **React Query** for async data fetching
+* **Chart.js** with neon-styled, real-time graphs
+* **Socket.io (client)** for live data
 
-Example: Access live metrics
+### **Backend**
 
-```bash
-curl http://localhost:4000/system/info
-```
+* **Node.js (Express, TypeScript)** for APIs
+* **Socket.io (server)** for real-time updates
+* **JWT** for authentication
+* **Cockpit API integration** (systemd, logs, users)
+* **Portainer API integration** (containers, volumes, images)
+* **Docker SDK** for direct container interactions
 
-Expected output:
+### **Databases**
 
-```json
-{
-  "hostname": "demo-host",
-  "os": "Ubuntu 22.04",
-  "uptime": 123456
-}
-```
-
----
-
-## API & Detailed Usage
-
-| Endpoint                        | Method | Description                               |
-| ------------------------------- | ------ | ----------------------------------------- |
-| `/system/info`                  | GET    | Retrieves system info via Cockpit API     |
-| `/system/service/:name/restart` | POST   | Restarts a systemd service                |
-| `/containers`                   | GET    | Lists Docker containers via Portainer API |
-
-**Example – Restart a Service**
-
-```bash
-curl -X POST http://localhost:4000/system/service/nginx/restart
-```
+* **PostgreSQL** for persistent user data and settings
+* **Redis** for fast session management
+* **InfluxDB** for long-term metrics storage
 
 ---
 
-## Configuration
+##  System Requirements
 
-You can customize settings in `.env`:
-
-```env
-FRONTEND_URL=http://localhost:3000
-BACKEND_URL=http://localhost:4000
-COCKPIT_BASE_URL=http://localhost:9090
-COCKPIT_TOKEN=your_cockpit_token
-PORTAINER_BASE_URL=http://localhost:9443/api
-PORTAINER_TOKEN=your_portainer_token
-```
+* **Linux host:** Ubuntu 22.04/24.04 LTS recommended
+* Works with: Debian 11/12, CentOS Stream 9, RHEL 9, Fedora 38+, openSUSE Leap 15.5+
+* **Docker installed** and running
+* **2GB RAM minimum**, 10GB free disk space
 
 ---
 
+##  Development Roadmap
+
+### Phase 1 – Foundation
+
+* Setup project structure (frontend + backend + Docker configs).
+* Establish Cockpit & Portainer API connectors.
+
+### Phase 2 – Backend API
+
+* Implement modular architecture (controllers, services, middleware).
+* Add JWT authentication and secure endpoints.
+
+### Phase 3 – Frontend UI
+
+* Build dashboard with matrix green design.
+* Add reusable UI components (services, containers, logs).
+
+### Phase 4 – Integration
+
+* Connect Cockpit/Portainer APIs with frontend.
+* Implement real-time updates (Socket.io).
+
+### Phase 5 – Advanced Features
+
+* Command Preview Mode (learn-as-you-manage).
+* Mobile optimization and offline support.
+
+### Phase 6 – Production Readiness
+
+* Testing, CI/CD pipelines, Docker deployment.
+* Documentation and open-source contributions.
 
 ---
 
-## Contributing
+##  Contribution to Open Source
 
-We welcome contributions!
+LinuxStudio is not just a tool—it’s a **community learning project** for the **open-source society**.
 
-1. Fork the repo
-2. Create a new branch:
+Here’s how it contributes:
 
-```bash
-git checkout -b feature/my-feature
-```
+* **Transparency & Learning:** Command Preview Mode helps beginners understand Linux commands behind GUI actions.
+* **Collaboration-Friendly:** Modular, open-source architecture makes it easy for contributors to extend functionality.
+* **Bridging Tools:** Combines Cockpit and Portainer, reducing fragmentation and aligning with open-source philosophy of interoperability.
+* **Educational Value:** Perfect for students, sysadmins, and hobbyists to learn Linux, Docker, and serverless design patterns.
+* **Future Extensions:** Encourages community-driven features like analytics dashboards, theme packs, and custom API plugins.
 
-3. Commit changes and push:
+We invite contributions in the form of:
 
-```bash
-git push origin feature/my-feature
-```
-
-4. Open a pull request
-
-
-
+* UI/UX improvements (green terminal themes, accessibility enhancements)
+* Backend integrations (support for Kubernetes, Podman, etc.)
+* Documentation and tutorials for new users
+* Testing and performance optimizations
 
 ---
 
-## FAQ
+##  Open Source Philosophy
 
-<details>
-<summary>Does LinuxStudio replace Cockpit and Portainer?</summary>
-No, it integrates them into a unified interface. You still need both installed.
-</details>
+LinuxStudio is designed with:
 
-<details>
-<summary>Can I run LinuxStudio without Docker?</summary>
-Yes, but Docker deployment simplifies setup.
-</details>
+* **Loose coupling & modularity** – so features evolve independently.
+* **Transparency** – showing users the Linux commands behind actions.
+* **Accessibility** – works across devices and adheres to web standards.
+* **Community-first** – built for real-world open-source collaboration.
 
 ---
 
-## Troubleshooting
+##  Author
 
-<details>
-<summary>Frontend not loading</summary>
-Ensure the backend is running and `NEXT_PUBLIC_BACKEND_URL` in the frontend `.env` matches your backend URL.
-</details>
+**Hadia Yasir**
+Computer Science Department
+Namal University Mianwali
+ Email: **[hadiya.ymalik@gmail.com](mailto:hadiya.ymalik@gmail.com)**
 
-<details>
-<summary>Metrics not updating</summary>
-Check your Socket.io connection and ensure WebSocket ports are open.
-</details>
-
----
